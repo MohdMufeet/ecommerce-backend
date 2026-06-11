@@ -1,6 +1,14 @@
-const app = require('./src/app.js');
+const app = require("./src/app.js");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+
+app.get("/", (req, res) => {
+  res.send("Api is running");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
