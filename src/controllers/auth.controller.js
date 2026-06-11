@@ -3,7 +3,7 @@ const asyncHandler = require("../utils/asyncHandler");
 const bcrypt = require("bcrypt");
 const ApiError = require("../utils/ApiError");
 const jwt = require("jsonwebtoken");
-const { ApiResponse } = require("../utils/ApiResponse");
+const ApiResponse = require("../utils/ApiResponse");
 
 const signupUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
