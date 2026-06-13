@@ -2,8 +2,8 @@ const User = require("../models/user.model");
 const asyncHandler = require("../utils/asyncHandler");
 const bcrypt = require("bcrypt");
 const ApiError = require("../utils/ApiError");
-const jwt = require("jsonwebtoken");
 const ApiResponse = require("../utils/ApiResponse");
+const { generateToken } = require("../utils/jwt");
 
 const signupUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
@@ -24,6 +24,9 @@ const signupUser = asyncHandler(async (req, res) => {
   if (!user) {
     throw new ApiError(400, "User not created");
   }
+  const token = generateToken(user._id);
+  user.token = token;
+
   return res.status(201).json(new ApiResponse(201, user, "User created"));
 });
 
@@ -46,6 +49,9 @@ const loginUser = asyncHandler(async (req, res) => {
     if (!isMatch) {
       throw new ApiError(400, "Invalid credentials");
     }
+
+    const token = generateToken(user._id);
+    user.token = token;
 
     return res.status(200).json(new ApiResponse(200, user, "Login successful"));
     
