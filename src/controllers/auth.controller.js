@@ -25,9 +25,14 @@ const signupUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "User not created");
   }
   const token = generateToken(user._id);
+   const updatedUser = {
+    ...user._doc,
+    token
+  }
   user.token = token;
+  console.log("user",user);
 
-  return res.status(201).json(new ApiResponse(201, user, "User created"));
+  return res.status(201).json(new ApiResponse(201, updatedUser, "User created"));
 });
 
 const loginUser = asyncHandler(async (req, res) => {
@@ -52,8 +57,11 @@ const loginUser = asyncHandler(async (req, res) => {
 
     const token = generateToken(user._id);
     user.token = token;
-
-    return res.status(200).json(new ApiResponse(200, user, "Login successful"));
+     const updatedUser = {
+    ...user._doc,
+    token
+  }
+    return res.status(200).json(new ApiResponse(200, updatedUser, "Login successful"));
     
   
 });
