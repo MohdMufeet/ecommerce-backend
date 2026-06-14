@@ -32,7 +32,7 @@ const signupUser = asyncHandler(async (req, res) => {
   user.token = token;
   console.log("user",user);
 
-  return res.status(201).json(new ApiResponse(201, updatedUser, "User created"));
+  res.status(201).json(new ApiResponse(201, updatedUser, "User created"));
 });
 
 const loginUser = asyncHandler(async (req, res) => {
@@ -61,7 +61,8 @@ const loginUser = asyncHandler(async (req, res) => {
     ...user._doc,
     token
   }
-    return res.status(200).json(new ApiResponse(200, updatedUser, "Login successful"));
+  
+  res.status(200).json(new ApiResponse(200, updatedUser, "Login successful"));
     
   
 });

@@ -15,9 +15,11 @@ app.use(
 // Routes
 
 const authRoute = require("../src/routes/auth.route.js");
+const productRoute = require("../src/routes/product.route.js");
 const ErrorHandler = require("../src/middlewares/ErrorHandler.middleware.js");
 
 app.use("/api/auth", authRoute);
+app.use("/api/product", productRoute);
 
 // Error Handler
 app.use(ErrorHandler);
