@@ -1,11 +1,10 @@
 const productModel = require("../models/product.model");
 const ApiError = require("../utils/ApiError");
 const asyncHandler = require("../utils/asyncHandler");
-const ApiResponse = require("../utils/ApiResponse")
+const ApiResponse = require("../utils/ApiResponse");
 
 const createProduct = asyncHandler(async (req, res) => {
   const { title, description, price, stoke, image } = req.body;
-console.log("hii",title)
   if (
     title == "" ||
     description == "" ||
