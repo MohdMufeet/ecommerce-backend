@@ -4,14 +4,14 @@ const asyncHandler = require("../utils/asyncHandler");
 const ApiResponse = require("../utils/ApiResponse");
 
 const createProduct = asyncHandler(async (req, res) => {
-  const { title, description, price, stock, image, category} = req.body;
+  const { title, description, price, stock, image, category } = req.body;
   if (
-    title == "" ||
-    description == "" ||
-    price == 0 ||
-    stock == 0 ||
-    image == "",
-    category == ""
+    (title == "" ||
+      description == "" ||
+      price == 0 ||
+      stock == 0 ||
+      image == "",
+    category == "")
   ) {
     throw new ApiError(400, "All fields are required");
   }
@@ -28,7 +28,7 @@ const createProduct = asyncHandler(async (req, res) => {
     price,
     stock,
     image,
-    category
+    category,
   });
 
   if (!product) {
@@ -41,16 +41,17 @@ const createProduct = asyncHandler(async (req, res) => {
 const updateProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const productData = req.body;
-
+console.log( productData)
   if (!id) {
     throw new ApiError(400, "something went wrong");
   }
 
   const product = await productModel.findByIdAndUpdate(
     { _id: id },
-    productData,
-    { new: true },
+    { $set: productData },
+    { returnDocument: "after" },
   );
+console.log( product)
 
   res
     .status(201)
