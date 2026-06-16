@@ -15,11 +15,13 @@ app.use(
 // Routes
 
 const authRoute = require("../src/routes/auth.route.js");
+const adminRoute = require("../src/routes/admin.route.js");
 const productRoute = require("../src/routes/product.route.js");
 const ErrorHandler = require("../src/middlewares/ErrorHandler.middleware.js");
 
 app.use("/api/auth", authRoute);
 app.use("/api/product", productRoute);
+app.use("/api/admin", adminRoute);
 
 // Error Handler
 app.use(ErrorHandler);
