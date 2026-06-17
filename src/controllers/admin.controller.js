@@ -24,15 +24,9 @@ const signupAdmin = asyncHandler(async (req, res) => {
   if (!Admin) {
     throw new ApiError(400, "Admin not created");
   }
-  const token = generateToken(Admin._id);
-   const updatedAdmin = {
-    ...Admin._doc,
-    token
-  }
-  Admin.token = token;
-  console.log("Admin",Admin);
+ 
 
-  res.status(201).json(new ApiResponse(201, updatedAdmin, "Admin created"));
+  res.status(201).json(new ApiResponse(201, Admin, "Admin created"));
 });
 
 const loginAdmin = asyncHandler(async (req, res) => {
